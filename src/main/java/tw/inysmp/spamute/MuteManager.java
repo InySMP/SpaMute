@@ -126,25 +126,50 @@ public class MuteManager {
         }
         return true;
     }
+    
+    // --- 新增: 供 /unmute 指令使用的 Public 方法 ---
 
     /**
-     * 手動/自動解除禁言。
+     * 手動強制解除禁言。由指令處理器 (如 /unmute) 呼叫。
+     * @param playerId 玩家的 UUID
+     */
+    public void forceUnmutePlayer(UUID playerId) {
+        if (mutedPlayers.containsKey(playerId)) {
+            mutedPlayers.remove(playerId);
+            
+            // 發送解除禁言通知給玩家
+            if (Bukkit.getPlayer(playerId) != null && Bukkit.getPlayer(playerId).isOnline()) {
+                 Bukkit.getPlayer(playerId).sendMessage(plugin.getMessage("unmute-success-target"));
+            }
+            
+            saveMuteData(); 
+        }
+    }
+    
+    // --- Private: 供後臺自動解除使用的私有方法 ---
+
+    /**
+     * 自動解除禁言 (由檢查任務呼叫)。
      * @param playerId 玩家的 UUID
      */
     private void unmutePlayer(UUID playerId) {
-        mutedPlayers.remove(playerId);
-        
-        // 發送解除禁言通知給玩家
-        if (Bukkit.getPlayer(playerId) != null && Bukkit.getPlayer(playerId).isOnline()) {
-             Bukkit.getPlayer(playerId).sendMessage(plugin.getMessage("player-unmuted-auto"));
+        if (mutedPlayers.containsKey(playerId)) {
+            mutedPlayers.remove(playerId);
+            
+            // 發送解除禁言通知給玩家
+            if (Bukkit.getPlayer(playerId) != null && Bukkit.getPlayer(playerId).isOnline()) {
+                 Bukkit.getPlayer(playerId).sendMessage(plugin.getMessage("player-unmuted-auto"));
+            }
+            
+            // 通知管理員 
+            plugin.getServer().broadcast(plugin.getPluginPrefix() + ChatColor.GREEN + 
+                Bukkit.getOfflinePlayer(playerId).getName() + " 的禁言已自動解除。", "spamute.admin");
+            
+            saveMuteData(); 
         }
-        
-        // 通知管理員 
-        plugin.getServer().broadcast(plugin.getPluginPrefix() + ChatColor.GREEN + 
-            Bukkit.getOfflinePlayer(playerId).getName() + " 的禁言已自動解除。", "spamute.admin");
-        
-        saveMuteData(); 
     }
+    
+    // --- 時間格式化與 Getter ---
     
     /**
      * 獲取解除禁言的時間 (格式化)。
@@ -171,7 +196,7 @@ public class MuteManager {
     
     /**
      * 將秒數轉換為易讀的時長格式 (例如 86400 -> 1天)。
-     * * @param durationSeconds 總時長（秒）
+     * @param durationSeconds 總時長（秒）
      * @return 格式化的時長字符串
      */
     public String formatDuration(long durationSeconds) {
