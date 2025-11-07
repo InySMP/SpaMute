@@ -1,0 +1,19 @@
+name: SpaMute
+version: ${version}
+main: tw.inysmp.spamute.SpaMute
+api-version: '1.21'
+authors: [SpaMute - InyTw]
+description: An automatic anti-spam and mute plugin.
+
+commands:
+  spamute:
+    description: SpaMute plugin command.
+    usage: /spamute <reload>
+    permission: spamute.admin
+permissions:
+  spamute.admin:
+    description: Allows reloading the configuration.
+    default: op
+  spamute.bypass:
+    description: Allows bypassing the anti-spam checks.
+    default: false

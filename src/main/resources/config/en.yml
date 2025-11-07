@@ -1,0 +1,31 @@
+#
+# 💎 SpaMute - Configuration File 💎
+#
+
+# Do not touch this #
+version: ${version}
+
+# --- Spam Detection Settings ---
+spam-detection:
+# Sending 'max-messages' messages within 'time-window-seconds' will be considered spamming.
+# Your requirement is 4 spamming attempts => 1-day ban (i.e., 4 penalty triggers)
+
+# Detection window (seconds): The number of messages accumulated within this time
+time-window-seconds: 3
+
+# Maximum number of messages: The maximum number of messages allowed to be sent within the detection window
+max-messages: 5
+
+# Penalty threshold: How many spamming attempts (i.e., exceeding max-messages) a player needs to trigger before being banned
+mute-threshold: 4
+
+# --- Mute Settings ---
+mute:
+# Mute duration (seconds). 1 day = 86400 seconds
+duration-seconds: 86400
+
+# Automatically unmute after the mute ends
+auto-unmute: true
+
+# Reset the spam count after the mute penalty is triggered
+reset-count-on-mute: true

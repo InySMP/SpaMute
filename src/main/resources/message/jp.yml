@@ -1,0 +1,41 @@
+#
+# 🎨 SpaMute - メッセージ設定ファイル 🎨
+# 色の範囲を定義するには「&」記号を使用します。
+#
+
+# --- Prefix ---
+prefix: "&6[&b&lSpaMute&6] &r"
+
+# --- 警告および禁止情報 ---
+
+# トイハウス印刷法到着警告ニュース（トイハウス発行）
+player-warning:
+- "{prefix}&e&l警告！&7頻繁なニュースレターをリクエストしてください。&r"
+- "{prefix}&7您已合計&c{count}/{threshold}&7回目の印刷警告。&r"
+
+# トイメーカーが禁止された際に送信されたトイメーカーの個人情報
+player-muted:
+- "{prefix} ======== &c&l🚫禁止通知🚫&r ========"
+- "{prefix} &7連続印刷自動禁止&e{duration}&7。&r"
+- "{prefix} &7禁止&a{unmute_time} にて &7自動解除。&r"
+- "{prefix} =========================================================================
+
+# 禁止期間のトライアル時に届いたニュース
+player-try-speak: "{prefix}&c您已对语&7(&e剩餘 &6{remaining}&7)&c，無法癙言。&r"
+
+# おもちゃ屋の禁止時間が終了し、自動解除禁止が発令されました おもちゃ屋の個人ニュース
+player-unmuted-auto: "{prefix}&aの禁止が自動的に解除されました。これで可能です。&r"
+
+# 衣装管理者からの通知 (spamute.admin Limited Toymaker)
+admin-notify-mute: "{prefix}&c&l🚨 お問い合わせ通知🚨 &b{player} &7inprinting automatic prohibition &e{duration}&7!&r"
+
+# --- コマンド情報 ---
+
+# 新規案件（給与管理者）の公開成功のお知らせ
+command-reload-success: "{prefix}&a 新規配置成功。&r"
+
+# 制限の適用に関する一時情報
+command-no-permission: "{prefix}&c 您沒有进行这种过程。&r"
+
+# ディレクティブと一時情報の使用法に誤りがあります
+command-usage: "{prefix}&7 usage: &e/spamute reload&r"

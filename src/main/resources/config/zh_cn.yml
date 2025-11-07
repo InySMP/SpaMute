@@ -1,0 +1,31 @@
+#
+# 💎 SpaMute - 设定档 💎
+#
+
+# 请勿触碰此物 #
+version: ${version}
+
+# --- 刷屏检测设定 ---
+spam-detection:
+# 玩家在 'time-window-seconds' 内发送 'max-messages' 条消息将被视为刷屏。 
+# 您的要求是 4 次刷屏 => 禁言 1 天 (即 4 次惩罚触发)
+
+# 侦测窗口（秒）：在此时间内累计的消息数量
+time-window-seconds: 3
+
+# 最大消息数：在侦测窗口内允许发送的最大消息数
+max-messages: 5
+
+# 惩罚阈值：玩家需要触发多少次刷屏（即超过 max-messages）才会被禁言
+mute-threshold: 4
+
+# --- 禁言设定 ---
+mute:
+# 禁言时长 (秒)。 1 天 = 86400 秒
+duration-seconds: 86400
+
+# 禁言结束后是否自动解除禁言
+auto-unmute: true
+
+# 禁言惩罚触发后，是否重置刷屏计数
+reset-count-on-mute: true

@@ -1,0 +1,52 @@
+#
+
+# 🎨 SpaMute - Message Configuration File 🎨
+
+# Use the '&' symbol to define color codes.
+
+#
+
+# --- Plugin Prefix ---
+prefix: "&6[&b&lSpaMute&6] &r"
+
+# --- Warning and Mute Messages ---
+
+# Message sent to the player when they receive a warning for spamming (sent to the player themselves)
+
+player-warning:
+
+- "{prefix}&e&l Warning! &7 Please do not send messages frequently.&r"
+
+- "{prefix}&7 You have accumulated &c{count}/{threshold} &7 spamming warnings.&r"
+
+# Message sent to the player when they are muted
+
+player-muted:
+
+- "{prefix} ======== &c&l🚫 Mute Notification 🚫&r ========"
+
+- "{prefix} &7 You have been automatically muted for continuous spamming &e{duration}&7.&r"
+
+- "{prefix} &7 The mute will end at &a{unmute_time} &7 Automatically lifted. &r"
+
+- "{prefix} ======================================"
+
+# Message received when a player attempts to speak while muted
+player-try-speak: "{prefix}&c You have been muted &7(&e Remaining &6{remaining}&7)&c, and cannot speak. &r"
+
+# Message sent to the player when the muted period expires and the ban is automatically lifted
+player-unmuted-auto: "{prefix}&a Your ban has been automatically lifted, and you can now speak. &r"
+
+# Notification sent to the server administrator (players with spamute.admin privileges)
+admin-notify-mute: "{prefix}&c&l🚨 Server Notification 🚨 &b{player} &7 Automatically muted for spamming &e{duration}&7! &r"
+
+# --- Command Messages ---
+
+# Message indicating successful plugin reload (for administrator)
+command-reload-success: "{prefix}&a Configuration has been successfully reloaded.&r"
+
+# Message indicating permission not required to execute the command
+command-no-permission: "{prefix}&c You do not have permission to execute this command.&r"
+
+# Message indicating incorrect command usage
+command-usage: "{prefix}&7 Usage: &e/spamute reload&r"

@@ -1,0 +1,31 @@
+#
+# 💎 SpaMute - 設定ファイル 💎
+#
+
+# この設定は変更しないでください #
+version: ${version}
+
+# --- スパム検出設定 ---
+spam-detection:
+# 「time-window-seconds」内に「max-messages」件のメッセージを送信すると、スパム行為とみなされます。
+# スパム行為の要件は、4回まで送信した場合 → 1日間のBAN（つまり、ペナルティ発動回数が4回）です。
+
+# 検出ウィンドウ（秒）：この時間内に蓄積されたメッセージ数
+time-window-seconds: 3
+
+# 最大メッセージ数：検出ウィンドウ内に送信できる最大メッセージ数
+max-messages: 5
+
+# ペナルティしきい値：プレイヤーがBANされる前に、何回スパム行為（つまり、max-messagesを超える）を試行する必要があるか
+mute-threshold: 4
+
+# --- ミュート設定 ---
+mute:
+# ミュート時間（秒）。 1日 = 86400秒
+duration-seconds: 86400
+
+# ミュート終了後に自動的にミュート解除する
+auto-unmute: true
+
+# ミュートペナルティが発動した後にスパムカウントをリセットする
+reset-count-on-mute: true
