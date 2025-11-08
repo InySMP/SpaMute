@@ -1,8 +1,10 @@
 # ✨ SpaMute - Automatic Anti-Spam and Mute Plugin
 
+
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/InySMP/SpaMute)](https://github.com/InySMP/SpaMute/releases)
 [![GitHub license](https://img.shields.io/github/license/InySMP/SpaMute)](LICENSE)
 [![Discord](https://img.shields.io/discord/1431154141677359142?label=Discord&color=5865F2&logo=discord&logoColor=white&style=flat&query=online)](https://discord.gg/kXXSQxmYnG)
+[![Donate via PayPal](https://img.shields.io/badge/Donate-PayPal-00457C?style=for-the-badge&logo=paypal)](https://paypal.me/AnyIny)
 
 **SpaMute** is a lightweight and efficient Minecraft server plugin specifically designed to **automatically detect and punish** chat spamming behavior. By issuing temporary mutes (TempMute) to offending players, it effectively maintains a clean and orderly chat environment, significantly reducing the burden on server administrators.
 
