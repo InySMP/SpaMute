@@ -25,7 +25,7 @@
 
 ### How to Install
 
-1.  Download the latest `SpaMute-1.0.5.jar` file from [GitHub Releases](https://github.com/InySMP/SpaMute/releases).
+1.  Download the latest [![GitHub release (latest by date)](https://img.shields.io/github/v/release/InySMP/SpaMute)](https://github.com/InySMP/SpaMute/releases) file from [GitHub Releases](https://github.com/InySMP/SpaMute/releases).
 2.  Place the file into your server's `plugins/` folder.
 3.  **Restart** your server.
 4.  The plugin will automatically generate `config.yml` and `message.yml` inside the `plugins/SpaMute/` folder.
