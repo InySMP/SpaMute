@@ -14,10 +14,10 @@ spam-detection:
   time-window-seconds: 3 
   
   # 最大消息數：在偵測窗口內允許發送的最大消息數
-  max-messages: 5 
+  max-messages: 3 
   
   # 懲罰閾值：玩家需要觸發多少次刷屏（即超過 max-messages）才會被禁言
-  mute-threshold: 4
+  mute-threshold: 1
   
 # --- 禁言設定 ---
 mute:
