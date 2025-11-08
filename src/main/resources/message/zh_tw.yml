@@ -1,6 +1,13 @@
-# 
 # 🎨 SpaMute - Message Configuration File 🎨
 # 使用 '&' 符號來定義顏色代碼。
+# {prefix} - 插件前綴
+# {duration} - 禁言總時長 (格式化)
+# {remaining} - 禁言剩餘時間 (格式化)
+# {unmute_time} - 禁言解除的確切日期時間
+# {player} - 目標玩家名稱
+# {sender} - 執行指令的管理員名稱
+# {count} - 警告計數
+# {threshold} - 警告門檻
 # 
 
 # --- 插件前綴 ---
@@ -20,7 +27,7 @@ player-muted:
   - "{prefix} &7禁言將於 &a{unmute_time} &7自動解除。&r"
   - "{prefix} =============================="
 
-# 玩家被禁言期間嘗試發言時收到的消息
+# 玩家被禁言期間嘗試發言時收到的消息 (已使用 {remaining} 變數)
 player-try-speak: "{prefix}&c您已被禁言 &7(&e剩餘 &6{remaining}&7)&c，無法發言。&r"
 
 # 玩家禁言時間到期，自動解除禁言時發給玩家本人的消息
@@ -32,17 +39,25 @@ admin-notify-mute:
 - "{prefix} &b{player} &7因刷屏被自動禁言 &e{duration}&7！&r"
 - "{prefix} ==============================="
 
-unmute-success-sender: "{prefix} &6{player}&a的禁言已被&c{sender}&a解除"
+# 給予執行解除禁言指令的管理員回覆
+unmute-success-sender: "{prefix} &6{player}&a 的禁言已被 &c{sender}&a 解除。"
+
+# 給予被解除禁言的目標玩家的通知 (此為手動解除)
+unmute-success-target: "{prefix} &a您的禁言已被管理員手動解除，現在可以發言了。&r"
+
 
 # --- 指令消息 ---
 
+# /spamute reload 的用法提示
 reload-usage: "{prefix} &7用法: &e/spamute reload&r"
+
+# /help 或 /spamute 顯示的指令列表
 command-usage: 
 - "{prefix} ===== {prefix} &6Commands List &r====="
-- "{prefix} /spamute - Normal Command, commands list"
-- "{prefix} /spamute reload - reload config.yml & message.yml"
-- "{prefix} /spamute help - commands list"
-- "{prefix} /spamute unmute - Unmute player"
+- "{prefix} /spamute - 顯示指令列表"
+- "{prefix} /spamute reload - 重載配置檔案"
+- "{prefix} /spamute status <玩家名> - 查詢玩家禁言狀態"
+- "{prefix} /unmute <玩家名> - 手動解除玩家禁言"
 - "{prefix} =============================="
 
 # 插件重新載入成功的消息 (給管理員)
@@ -51,8 +66,8 @@ command-reload-success: "{prefix} &a配置已重新載入成功。&r"
 # 沒有權限執行指令時的消息
 command-no-permission: "{prefix} &c您沒有執行此命令的權限。&r"
 
-# 指令用法錯誤時的消息
+# 玩家不存在或未登入伺服器
+unmute-player-not-found: "{prefix} &c未找到玩家 &e{player}&c。"
 
-unmute-player-not-found: "{prefix} &c未找到 {player}"
-
-unmute-not-muted: "{prefix} &c玩家不在禁言名單中"
+# 玩家不在禁言名單中的錯誤訊息
+unmute-not-muted: "{prefix} &c玩家 &e{player}&c 不在禁言名單中。"

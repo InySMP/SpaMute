@@ -1,58 +1,73 @@
-#
 # 🎨 SpaMute - Message Configuration File 🎨
+
 # Use the '&' symbol to define color codes.
+# {prefix} - Plugin prefix
+# {duration} - Total mute duration (formatted)
+# {remaining} - Remaining mute time (formatted)
+# {unmute_time} - Exact date and time the mute will be lifted
+# {player} - Target player name
+# {sender} - Administrator name executing the command
+# {count} - Warning count
+# {threshold} - Warning threshold
 #
 
-# --- Plug-in prefix ---
+# --- Plugin prefix ---
 prefix: "&6[&b&lSpaMute&6] &r"
 
-# --- Warning and ban messages ---
+# --- Warning and mute messages ---
 
-# Message when a player receives a warning due to screen swiping behavior (sent to the player himself)
-player-warning: 
-- "{prefix}&e&lWarning! &7Do not send messages frequently.&r" 
-- "{prefix}&7You have accumulated &c{count}/{threshold} &7 screen spam warnings.&r"
+# Message sent to the player when they receive a warning for spamming (sent to the player themselves)
+player-warning:
+- "{prefix}&e&l Warning! &7 Please do not send messages frequently.&r"
+- "{prefix}&7 You have accumulated &c{count}/{threshold} &7 spamming warnings.&r"
 
-# The message sent to the player when the player is banned
-player-muted: 
-- "{prefix} ======== &c&l🚫 Mute Notification 🚫&r ========"
-- "{prefix} &7You have been automatically banned due to continuous screen spamming &e{duration}&7.&r" 
-- "{prefix} &7The ban will be automatically lifted at &a{unmute_time} &7.&r" 
-- "{prefix} =============================="
-
-# Message received when a player attempts to speak while being muted
-player-try-speak: "{prefix}&cYou have been banned &7(&eremaining &6{remaining}&7)&c and cannot speak.&r"
-
-# A message sent to the player when the player's ban time expires and the ban is automatically lifted
-player-unmuted-auto: "{prefix} &aYour mute has been automatically removed and you can now speak.&r"
-
-# Notification sent to server administrators (players with spamute.admin permissions)
-admin-notify-mute:
-- "{prefix} ======== &c&l🚨 Server Notification 🚨 &r========"
-- "{prefix} &b{player} &7 was automatically banned due to screen spam &e{duration}&7!&r"
+# Message sent to the player when they are muted:
+player-muted:
+- "{prefix} ======== &c&l🚫 Muted Notification 🚫&r ========"
+- "{prefix} &7 You have been automatically muted for continuous spamming &e{duration}&7.&r"
+- "{prefix} &7 The muted status will be automatically lifted at &a{unmute_time} &7.&r"
 - "{prefix} ==============================="
 
-unmute-success-sender: "{prefix} &6{player}&a's ban has been lifted by &c{sender}&a"
+# Message received when a player attempts to speak while muted (using the {remaining} variable):
+player-try-speak: "{prefix}&c You have been muted &7(&e Remaining &6{remaining}&7)&c, and cannot speak.&r"
 
-# --- Command message ---
+# When a player's ban expires and is automatically lifted, the following message is sent to the player:
+player-unmuted-auto: "{prefix} &aYour ban has been automatically lifted, you can now speak."
 
-reload-usage: "{prefix} &7usage: &e/spamute reload&r"
+# Notification sent to the server administrator (player with spamute.admin privileges)
+admin-notify-mute:
+- "{prefix} ======== &c&l🚨 Server Notification 🚨 &r========"
+- "{prefix} &b{player} &7 was automatically banned for spamming &e{duration}&7! &r"
+- "{prefix} ================================"
+
+# Response to the administrator who executed the ban lifting command
+unmute-success-sender: "{prefix} &6{player}&a's ban has been &c{sender}&a Unmute."
+
+# Notify the target player whose mute has been lifted (this is a manual unmute)
+unmute-success-target: "{prefix} &aYour mute has been manually lifted by the administrator, you can now speak. &r"
+
+# --- Command Messages ---
+
+# Usage tips for /spamute reload
+reload-usage: "{prefix} &7 Usage: &e/spamute reload&r"
+
+# List of commands displayed by /help or /spamute
 command-usage:
 - "{prefix} ===== {prefix} &6Commands List &r====="
-- "{prefix} /spamute - Normal Command, commands list"
-- "{prefix} /spamute reload - reload config.yml & message.yml"
-- "{prefix} /spamute help - commands list"
-- "{prefix} /spamute unmute - Unmute player"
-- "{prefix} =============================="
+- "{prefix} /spamute - Display the list of commands"
+- "{prefix} /spamute reload - Reload the configuration file"
+- "{prefix} /spamute status <player name> - Check the player's mute status"
+- "{prefix} /unmute <player name> - Manually unmute a player.
+- "{prefix} ==============================="
 
-# Plug-in reload successful message (to administrator)
-command-reload-success: "{prefix} &aThe configuration has been reloaded successfully.&r"
+# Message indicating successful plugin reload (to administrator)
+command-reload-success: "{prefix} &a Configuration has been successfully reloaded. &r"
 
-# Message when there is no permission to execute the command
-command-no-permission: "{prefix} &cYou do not have permission to execute this command.&r"
+# Message indicating permission not required to execute a command
+command-no-permission: "{prefix} &c You do not have permission to execute this command. &r"
 
-# Message when instruction usage is incorrect
+# Player does not exist or is not logged into the server
+unmute-player-not-found: "{prefix} &c Player not found &e{player}&c."
 
-unmute-player-not-found: "{prefix} &c{player} not found"
-
-unmute-not-muted: "{prefix} &cThe player is not on the muted list"
+# Error message indicating the player is not in the mute list
+unmute-not-muted: "{prefix} &c Player &e{player}&c Not in the mute list."

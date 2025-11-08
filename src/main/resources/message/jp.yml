@@ -1,58 +1,72 @@
-#
 # 🎨 SpaMute - メッセージ設定ファイル 🎨
-# カラーコードを定義するには「&」記号を使用します。
+# 色コードを定義するには「&」記号を使用します。
+# {prefix} - プラグインのプレフィックス
+# {duration} - ミュートの合計時間（フォーマット済み）
+# {remaining} - 残りのミュート時間（フォーマット済み）
+# {unmute_time} - ミュートが解除される正確な日時
+# {player} - 対象のプレイヤー名
+# {sender} - コマンドを実行する管理者名
+# {count} - 警告回数
+# {threshold} - 警告しきい値
 #
 
 # --- プラグインのプレフィックス ---
-接頭辞: "&6[&b&lSpaMute&6] &r"
+prefix: "&6[&b&lSpaMute&6] &r"
 
-# --- 警告および禁止メッセージ ---
+# --- 警告とミュートメッセージ ---
 
-# プレイヤーが画面のスワイプ動作により警告を受けたときのメッセージ (プレイヤー自身に送信されます)
-プレイヤーへの警告:
-- "{prefix}&e&l警告! &7メッセージを頻繁に送信しないでください。&r"
-- "{prefix}&7&c{count}/{threshold} &7 の画面スパム警告が蓄積されました。&r"
+# スパム行為の警告を受け取ったプレイヤーに送信されるメッセージ（プレイヤー自身に送信されます）
+player-warning:
+- "{prefix}&e&l 警告！&7 頻繁にメッセージを送信しないでください。&r"
+- "{prefix}&7 スパム行為が累積で &c{count}/{threshold} &7 回発生しましたwarnings.&r"
 
-# プレーヤーが禁止されたときにプレーヤーに送信されるメッセージ
-プレイヤーミュート:
-- "{prefix} ======== &c&l🚫禁止通知 🚫&r =========
-- 「{prefix} &7継続的な画面スパムのため、自動的に禁止されました &e{duration}&7.&r」
-- "{prefix} &7禁止は &a{unmute_time} &7 に自動的に解除されます&r"
-- "{prefix} ===============================
+# プレイヤーがミュートされたときに送信されるメッセージ:
+player-muted:
+- "{prefix} ========&c&l🚫 ミュート通知 🚫&r ========="
+- "{prefix} &7 スパム行為が継続したため、自動的にミュートされました。&e{duration}&7.&r"
+- "{prefix} &7 ミュート状態は &a{unmute_time} &7 に自動的に解除されます。&r"
+- "{prefix} ================================="
 
-# プレイヤーがミュート中に発言しようとしたときに受信するメッセージ
-player-try-speak: "{prefix}&cあなたは禁止されています &7(&eremaining &6{remaining}&7)&c なので話すことができません。&r"
+# プレイヤーがミュート中に発言しようとしたときに受信するメッセージ ({remaining} 変数を使用):
+player-try-speak: "{prefix}&c ミュートされました。&7(&e 残り&6{残り}&7)&c、発言できません。&r"
 
-# プレーヤーの禁止時間が経過し、禁止が自動的に解除されるときにプレーヤーに送信されるメッセージ
-player-unmuted-auto: "{prefix} &aミュートが自動的に解除され、発言できるようになりました。&r"
+# プレイヤーの禁止が期限切れとなり、自動的に解除されると、以下のメッセージがプレイヤーに送信されます:
+player-unmuted-auto: "{prefix} &a禁止が自動的に解除されました。発言できるようになりました。"
 
-# サーバー管理者 (spamute.admin 権限を持つプレイヤー) に通知が送信されます
-管理者通知ミュート:
-- "{prefix} ======== &c&l🚨 サーバー通知 🚨 &r=========
-- 「{prefix} &b{player} &7 は画面スパムのため自動的に禁止されました &e{duration}&7!&r」
-- "{prefix} ================================
+# サーバー管理者（spamute.admin 権限を持つプレイヤー）に通知を送信しました
+admin-notify-mute:
+- "{prefix} ======== &c&l🚨 サーバー通知 🚨 &r========"
+- "{prefix} &b{player} &7 は、&e{duration}&7 のスパム行為のため自動的に BAN されました! &r"
+- "{prefix} ==================================="
 
-unmute-success-sender: "{prefix} &6{player}&a の禁止は &c{sender}&a によって解除されました"
+# BAN 解除コマンドを実行した管理者への応答
+unmute-success-sender: "{prefix} &6{player}&a の BAN が &c{sender}&a によってミュート解除されました。"
+
+# ミュートが解除された対象プレイヤーに通知します（これは手動ミュート解除です）
+unmute-success-target: "{prefix} &a 管理者によってミュートが解除されました。発言できます。&r"
 
 # --- コマンドメッセージ ---
 
-reload-usage: "{prefix} &7usage: &e/spamute reload&r"
-コマンドの使用法:
-- "{prefix} ===== {prefix} &6コマンドリスト&r=====
-- "{prefix} /spamute - 通常コマンド、コマンドリスト"
-- "{prefix} /spamute reload - config.yml と message.yml をリロードします"
-- "{prefix} /spamute ヘルプ - コマンド リスト"
-- "{prefix} /spamute unmute - プレーヤーのミュートを解除します"
-- "{prefix} ===============================
+# /spamute reload の使い方のヒント
+reload-usage: "{prefix} &7 使用方法: &e/spamute reload&r"
 
-# プラグインのリロード成功メッセージ (管理者へ)
-command-reload-success: "{prefix} &a設定は正常に再ロードされました。&r"
+# /help または /spamute で表示されるコマンド一覧
+command-usage:
+- "{prefix} ===== {prefix} &6 コマンド一覧 &r======"
+- "{prefix} /spamute - コマンド一覧を表示する"
+- "{prefix} /spamute reload - 設定ファイルをリロードする"
+- "{prefix} /spamute status <プレイヤー名> - プレイヤーのミュート状態を確認する"
+- "{prefix} /unmute <プレイヤー名> - プレイヤーのミュートを手動で解除する"
+- "{prefix} ===========================================""
 
-# コマンド実行権限がない場合のメッセージ
-command-no-permission: "{prefix} &cこのコマンドを実行する権限がありません。&r"
+# プラグインの再読み込みが成功したことを示すメッセージ（管理者向け）
+command-reload-success: "{prefix} &a 設定の再読み込みに成功しました。&r"
 
-# 命令の使い方が間違っている場合のメッセージ
+# コマンド実行に必要な権限がないことを示すメッセージ
+command-no-permission: "{prefix} &c このコマンドを実行する権限がありません。&r"
 
-unmute-player-not-found: "{prefix} &c{player} が見つかりません"
+# プレイヤーが存在しないか、サーバーにログインしていません
+unmute-player-not-found: "{prefix} &c プレイヤーが見つかりません &e{player}&c."
 
-unmute-not-muted: "{prefix} &cプレーヤーはミュートリストに載っていません"
+# プレイヤーがミュートリストに存在しないことを示すエラーメッセージ
+unmute-not-muted: "{prefix} &c プレイヤー &e{player}&c ミュートリストに存在しません。"
