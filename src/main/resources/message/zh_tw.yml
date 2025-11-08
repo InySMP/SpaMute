@@ -18,24 +18,41 @@ player-muted:
   - "{prefix} ======== &c&l🚫 禁言通知 🚫&r ========"
   - "{prefix} &7您因連續刷屏行為已被自動禁言 &e{duration}&7。&r"
   - "{prefix} &7禁言將於 &a{unmute_time} &7自動解除。&r"
-  - "{prefix} ====================================="
+  - "{prefix} =============================="
 
 # 玩家被禁言期間嘗試發言時收到的消息
 player-try-speak: "{prefix}&c您已被禁言 &7(&e剩餘 &6{remaining}&7)&c，無法發言。&r"
 
 # 玩家禁言時間到期，自動解除禁言時發給玩家本人的消息
-player-unmuted-auto: "{prefix}&a您的禁言已自動解除，現在可以發言了。&r"
+player-unmuted-auto: "{prefix} &a您的禁言已自動解除，現在可以發言了。&r"
 
 # 發送給伺服器管理員（有 spamute.admin 權限的玩家）的通知
-admin-notify-mute: "{prefix}&c&l🚨 伺服器通知 🚨 &b{player} &7因刷屏被自動禁言 &e{duration}&7！&r"
+admin-notify-mute: 
+- "{prefix} ======== &c&l🚨 伺服器通知 🚨 &r========"
+- "{prefix} &b{player} &7因刷屏被自動禁言 &e{duration}&7！&r"
+- "{prefix} ==============================="
+
+unmute-success-sender: "{prefix} &6{player}&a的禁言已被&c{sender}&a解除"
 
 # --- 指令消息 ---
 
+reload-usage: "{prefix} &7用法: &e/spamute reload&r"
+command-usage: 
+- "{prefix} ===== {prefix} &6Commands List &r====="
+- "{prefix} /spamute - Normal Command, commands list"
+- "{prefix} /spamute reload - reload config.yml & message.yml"
+- "{prefix} /spamute help - commands list"
+- "{prefix} /spamute unmute - Unmute player"
+- "{prefix} =============================="
+
 # 插件重新載入成功的消息 (給管理員)
-command-reload-success: "{prefix}&a配置已重新載入成功。&r"
+command-reload-success: "{prefix} &a配置已重新載入成功。&r"
 
 # 沒有權限執行指令時的消息
-command-no-permission: "{prefix}&c您沒有執行此命令的權限。&r"
+command-no-permission: "{prefix} &c您沒有執行此命令的權限。&r"
 
 # 指令用法錯誤時的消息
-command-usage: "{prefix}&7用法: &e/spamute reload&r"
+
+unmute-player-not-found: "{prefix} &c未找到 {player}"
+
+unmute-not-muted: "{prefix} &c玩家不在禁言名單中"

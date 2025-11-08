@@ -1,41 +1,58 @@
 #
 # 🎨 SpaMute - メッセージ設定ファイル 🎨
-# 色の範囲を定義するには「&」記号を使用します。
+# カラーコードを定義するには「&」記号を使用します。
 #
 
-# --- Prefix ---
-prefix: "&6[&b&lSpaMute&6] &r"
+# --- プラグインのプレフィックス ---
+接頭辞: "&6[&b&lSpaMute&6] &r"
 
-# --- 警告および禁止情報 ---
+# --- 警告および禁止メッセージ ---
 
-# トイハウス印刷法到着警告ニュース（トイハウス発行）
-player-warning:
-- "{prefix}&e&l警告！&7頻繁なニュースレターをリクエストしてください。&r"
-- "{prefix}&7您已合計&c{count}/{threshold}&7回目の印刷警告。&r"
+# プレイヤーが画面のスワイプ動作により警告を受けたときのメッセージ (プレイヤー自身に送信されます)
+プレイヤーへの警告:
+- "{prefix}&e&l警告! &7メッセージを頻繁に送信しないでください。&r"
+- "{prefix}&7&c{count}/{threshold} &7 の画面スパム警告が蓄積されました。&r"
 
-# トイメーカーが禁止された際に送信されたトイメーカーの個人情報
-player-muted:
-- "{prefix} ======== &c&l🚫禁止通知🚫&r ========"
-- "{prefix} &7連続印刷自動禁止&e{duration}&7。&r"
-- "{prefix} &7禁止&a{unmute_time} にて &7自動解除。&r"
-- "{prefix} =========================================================================
+# プレーヤーが禁止されたときにプレーヤーに送信されるメッセージ
+プレイヤーミュート:
+- "{prefix} ======== &c&l🚫禁止通知 🚫&r =========
+- 「{prefix} &7継続的な画面スパムのため、自動的に禁止されました &e{duration}&7.&r」
+- "{prefix} &7禁止は &a{unmute_time} &7 に自動的に解除されます&r"
+- "{prefix} ===============================
 
-# 禁止期間のトライアル時に届いたニュース
-player-try-speak: "{prefix}&c您已对语&7(&e剩餘 &6{remaining}&7)&c，無法癙言。&r"
+# プレイヤーがミュート中に発言しようとしたときに受信するメッセージ
+player-try-speak: "{prefix}&cあなたは禁止されています &7(&eremaining &6{remaining}&7)&c なので話すことができません。&r"
 
-# おもちゃ屋の禁止時間が終了し、自動解除禁止が発令されました おもちゃ屋の個人ニュース
-player-unmuted-auto: "{prefix}&aの禁止が自動的に解除されました。これで可能です。&r"
+# プレーヤーの禁止時間が経過し、禁止が自動的に解除されるときにプレーヤーに送信されるメッセージ
+player-unmuted-auto: "{prefix} &aミュートが自動的に解除され、発言できるようになりました。&r"
 
-# 衣装管理者からの通知 (spamute.admin Limited Toymaker)
-admin-notify-mute: "{prefix}&c&l🚨 お問い合わせ通知🚨 &b{player} &7inprinting automatic prohibition &e{duration}&7!&r"
+# サーバー管理者 (spamute.admin 権限を持つプレイヤー) に通知が送信されます
+管理者通知ミュート:
+- "{prefix} ======== &c&l🚨 サーバー通知 🚨 &r=========
+- 「{prefix} &b{player} &7 は画面スパムのため自動的に禁止されました &e{duration}&7!&r」
+- "{prefix} ================================
 
-# --- コマンド情報 ---
+unmute-success-sender: "{prefix} &6{player}&a の禁止は &c{sender}&a によって解除されました"
 
-# 新規案件（給与管理者）の公開成功のお知らせ
-command-reload-success: "{prefix}&a 新規配置成功。&r"
+# --- コマンドメッセージ ---
 
-# 制限の適用に関する一時情報
-command-no-permission: "{prefix}&c 您沒有进行这种过程。&r"
+reload-usage: "{prefix} &7usage: &e/spamute reload&r"
+コマンドの使用法:
+- "{prefix} ===== {prefix} &6コマンドリスト&r=====
+- "{prefix} /spamute - 通常コマンド、コマンドリスト"
+- "{prefix} /spamute reload - config.yml と message.yml をリロードします"
+- "{prefix} /spamute ヘルプ - コマンド リスト"
+- "{prefix} /spamute unmute - プレーヤーのミュートを解除します"
+- "{prefix} ===============================
 
-# ディレクティブと一時情報の使用法に誤りがあります
-command-usage: "{prefix}&7 usage: &e/spamute reload&r"
+# プラグインのリロード成功メッセージ (管理者へ)
+command-reload-success: "{prefix} &a設定は正常に再ロードされました。&r"
+
+# コマンド実行権限がない場合のメッセージ
+command-no-permission: "{prefix} &cこのコマンドを実行する権限がありません。&r"
+
+# 命令の使い方が間違っている場合のメッセージ
+
+unmute-player-not-found: "{prefix} &c{player} が見つかりません"
+
+unmute-not-muted: "{prefix} &cプレーヤーはミュートリストに載っていません"
